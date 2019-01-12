@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
 }
+.active-link {
+  font-weight: bold;
+}
 .header {
   position: fixed;
   border-bottom: 1px solid #b5b5b596;

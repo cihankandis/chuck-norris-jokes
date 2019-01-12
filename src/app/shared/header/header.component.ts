@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
+import { JokesService } from '../../core/services/jokes.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,10 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    public jokesService: JokesService
+  ) {}
   logout() {
     this.authService.logout();
   }

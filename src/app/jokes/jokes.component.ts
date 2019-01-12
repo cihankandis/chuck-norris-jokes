@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { JokesService } from '../core/services/jokes.service';
+import { Joke } from '../core/models/joke';
 
 @Component({
   selector: 'app-jokes',
@@ -9,7 +10,7 @@ import { JokesService } from '../core/services/jokes.service';
 })
 export class JokesComponent implements OnInit {
   private JOKE_COUNT = 10;
-  jokes: any[];
+  jokes: Joke[];
 
   constructor(private jokesService: JokesService) {}
 
@@ -23,5 +24,9 @@ export class JokesComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  changeFavouriteStatusOfJoke(joke: Joke) {
+    joke.isFavourite = this.jokesService.changeFavouriteStatusOfJoke(joke);
   }
 }
