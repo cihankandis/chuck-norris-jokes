@@ -7,10 +7,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
+import { LoginComponent } from './login/login.component';
+import { JokesComponent } from './jokes/jokes.component';
+
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent, JokesComponent],
   imports: [
     BrowserModule,
     CoreModule,

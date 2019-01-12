@@ -1,0 +1,46 @@
+<div fxFlexFill fxLayout="row" fxLayoutAlign="center" class="container">
+  <form class="form" [formGroup]="loginForm">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="usernameCtrl"
+              autocomplete="off"
+            />
+            <mat-error *ngIf="loginForm.get('usernameCtrl').invalid">
+              {{ getErrorUsername() }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Password"
+              type="password"
+              formControlName="passwordCtrl"
+            />
+            <mat-error *ngIf="loginForm.get('passwordCtrl').errors">
+              {{ getErrorPassword() }}
+            </mat-error>
+          </mat-form-field>
+
+          <div>
+            <!-- [disabled]="!loginForm.valid" -->
+            <button
+              class="form__button"
+              mat-raised-button
+              color="primary"
+              (click)="login()"
+            >
+              LOGIN
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
