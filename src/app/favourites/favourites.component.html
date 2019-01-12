@@ -1,10 +1,21 @@
-<h3>FAVOURITES</h3>
+<div class="favourites-header">
+  <h3>FAVOURITES</h3>
+
+  <mat-slide-toggle
+    [checked]="autoAddToggleValue"
+    [color]="'primary'"
+    [disabled]="jokesService.isFavouriteListFull()"
+    (change)="onAutoAddChange($event)"
+  >
+    Auto Add Joke
+  </mat-slide-toggle>
+</div>
 <mat-card
   *ngFor="let joke of jokesService.getFavouriteJokes()"
   class="joke-card"
 >
   <div class="joke-item">
-    <div>{{ joke.joke }}</div>
+    <div [innerHtml]="joke.joke"></div>
     <button mat-icon-button (click)="changeFavouriteStatusOfJoke(joke)">
       <mat-icon *ngIf="joke.isFavourite" style="color: red"> favorite </mat-icon
       ><mat-icon *ngIf="!joke.isFavourite"> favorite_border </mat-icon>

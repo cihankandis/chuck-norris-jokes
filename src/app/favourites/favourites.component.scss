@@ -1,9 +1,10 @@
-.jokes-container {
-  background: none;
-  box-shadow: none;
+.favourites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .joke-card {
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .joke-item {
   display: flex;

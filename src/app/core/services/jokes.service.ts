@@ -39,6 +39,10 @@ export class JokesService {
     return this.favouriteJokes;
   }
 
+  isFavouriteListFull() {
+    return this.favouriteJokes.length >= this.MAX_FAVOURITE_JOKE_COUNT;
+  }
+
   changeFavouriteStatusOfJoke(joke: Joke): boolean {
     if (this.favouriteJokes.findIndex(item => item.id === joke.id) >= 0) {
       this.removeFromFavourites(joke);

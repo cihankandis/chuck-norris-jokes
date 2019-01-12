@@ -1,4 +1,9 @@
-<h3>JOKES</h3>
+<div class="jokes-header">
+  <h3>JOKES</h3>
+  <button style="height: 36px" mat-raised-button (click)="fetchJokes()">
+    REFRESH JOKES
+  </button>
+</div>
 <mat-card *ngFor="let joke of jokes" class="joke-card">
   <div class="joke-item">
     <div [innerHtml]="joke.joke"></div>
