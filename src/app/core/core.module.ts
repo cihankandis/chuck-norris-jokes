@@ -5,12 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AuthService } from './services/auth.service';
+import { JokesService } from './services/jokes.service';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   imports: [CommonModule, BrowserAnimationsModule, HttpClientModule],
   exports: [],
   declarations: [],
-  providers: [AuthService]
+  providers: [AuthService, JokesService, StorageService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

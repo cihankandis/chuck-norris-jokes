@@ -1,30 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Joke } from '../models/joke';
+import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class JokesService {
   private MAX_FAVOURITE_JOKE_COUNT = 10;
-  favouriteJokes: Joke[] = [];
+  private favouriteJokes: Joke[] =
+    this.storageService.getItem('favouriteJokes') || [];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
-  getJokes(count) {
+  fetchJokes(count) {
     return this.http
       .get<any>(`${environment.jokesApiUrl}/jokes/random/${count}`)
       .pipe(
         map(jokes => {
-          return jokes.value;
+          //   return jokes.value;
+          return (
+            jokes &&
+            jokes.value.map(joke => {
+              joke.isFavourite =
+                this.favouriteJokes.findIndex(item => item.id === joke.id) >= 0;
+              return joke;
+            })
+          );
         })
       );
   }
 
-  changeFavouriteStatusOfJoke(joke: Joke) {
+  getFavouriteJokes() {
+    return this.favouriteJokes;
+  }
+
+  changeFavouriteStatusOfJoke(joke: Joke): boolean {
     if (this.favouriteJokes.findIndex(item => item.id === joke.id) >= 0) {
       this.removeFromFavourites(joke);
       return false;
@@ -39,7 +54,9 @@ export class JokesService {
 
   addToFavourites(joke: Joke) {
     if (this.favouriteJokes.findIndex(item => item.id === joke.id) < 0) {
+      joke.isFavourite = true;
       this.favouriteJokes.push(joke);
+      this.storageService.setItem('favouriteJokes', this.favouriteJokes);
     }
   }
 
@@ -47,6 +64,7 @@ export class JokesService {
     let index = this.favouriteJokes.findIndex(item => item.id === joke.id);
     if (index > -1) {
       this.favouriteJokes.splice(index, 1);
+      this.storageService.setItem('favouriteJokes', this.favouriteJokes);
     }
   }
 }

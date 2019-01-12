@@ -1,17 +1,10 @@
-<mat-card class="jokes-container">
-  <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-    <h3>JOKES</h3>
-  </mat-card-title>
-  <mat-card-content>
-    <mat-card *ngFor="let joke of jokes" class="joke-card">
-      <div class="joke-item">
-        <div>{{ joke.joke }}</div>
-        <button mat-icon-button (click)="changeFavouriteStatusOfJoke(joke)">
-          <mat-icon *ngIf="joke.isFavourite" style="color: red">
-            favorite </mat-icon
-          ><mat-icon *ngIf="!joke.isFavourite"> favorite_border </mat-icon>
-        </button>
-      </div>
-    </mat-card>
-  </mat-card-content>
+<h3>JOKES</h3>
+<mat-card *ngFor="let joke of jokes" class="joke-card">
+  <div class="joke-item">
+    <div [innerHtml]="joke.joke"></div>
+    <button mat-icon-button (click)="changeFavouriteStatusOfJoke(joke)">
+      <mat-icon *ngIf="joke.isFavourite" style="color: red"> favorite </mat-icon
+      ><mat-icon *ngIf="!joke.isFavourite"> favorite_border </mat-icon>
+    </button>
+  </div>
 </mat-card>
