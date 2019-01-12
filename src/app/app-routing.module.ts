@@ -5,6 +5,7 @@ import { AuthGuardService } from './core/guards/auth-guard.service';
 
 import { LoginComponent } from './login/login.component';
 import { JokesComponent } from './jokes/jokes.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'jokes',
     component: JokesComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'favourites',
+    component: FavouritesComponent,
     canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: 'jokes' }

@@ -9,11 +9,17 @@ import { SharedModule } from './shared/shared.module';
 
 import { LoginComponent } from './login/login.component';
 import { JokesComponent } from './jokes/jokes.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, JokesComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    JokesComponent,
+    FavouritesComponent
+  ],
   imports: [
     BrowserModule,
     CoreModule,

@@ -1,17 +1,20 @@
 <mat-toolbar fxLayout="row" class="header">
   <span fxFlex="15%" fxFlex.lt-sm="20px"></span>
+
   <div fxFlex="auto" fxLayoutAlign="space-between center" fxFlexFill>
-    <div
-      style="display: flex;
-    align-items: center;"
-    >
+    <div class="app-logo">
       <img style="max-height: 48px" src="assets/icons/chuck.svg" /> Chuck Norris
       Jokes
     </div>
     <div *ngIf="authService.getUser()">
-      <button class="header__logout" mat-button (click)="logout()">
+      <nav>
+        <a mat-button routerLink="/jokes"> JOKES </a>
+        <a mat-button routerLink="/favourites"> FAVOURITES </a>
+        <a mat-button (click)="logout()"> LOGOUT </a>
+      </nav>
+      <!-- <button class="header__logout" mat-button (click)="logout()">
         LOGOUT
-      </button>
+      </button> -->
     </div>
   </div>
 
