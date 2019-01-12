@@ -1,1 +1,11 @@
 JOKES!
+<mat-card *ngFor="let joke of jokes" class="joke-card">
+  <div class="joke-item">
+    <div>{{ joke.joke }}</div>
+    <button mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon">
+        favorite_border
+      </mat-icon>
+    </button>
+  </div>
+</mat-card>
