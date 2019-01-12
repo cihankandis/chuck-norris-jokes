@@ -6,31 +6,30 @@
       <img style="max-height: 48px" src="assets/icons/chuck.svg" />
       <span fxHide.lt-md="true"> Chuck Norris Jokes </span>
     </div>
+    <nav>
+      <a mat-button routerLink="/jokes" routerLinkActive="active-link">
+        JOKES
+      </a>
+      <a mat-button routerLink="/favourites" routerLinkActive="active-link">
+        <span
+          matBadge="{{
+            jokesService.favouriteJokes.length
+              ? jokesService.favouriteJokes.length
+              : null
+          }}"
+          matBadgeOverlap="false"
+          matBadgeColor="warn"
+          >FAVOURITES</span
+        >
+      </a>
+    </nav>
     <div *ngIf="authService.getUser()">
       <nav>
-        <a mat-button routerLink="/jokes" routerLinkActive="active-link">
-          JOKES
-        </a>
-        <a mat-button routerLink="/favourites" routerLinkActive="active-link">
-          <span
-            matBadge="{{
-              jokesService.favouriteJokes.length
-                ? jokesService.favouriteJokes.length
-                : null
-            }}"
-            matBadgeOverlap="false"
-            matBadgeColor="warn"
-            >FAVOURITES</span
-          >
-        </a>
         <a mat-button (click)="logout()">
           <span fxShow="true" fxShow.lt-sm="false">LOGOUT</span>
           <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon>
         </a>
       </nav>
-      <!-- <button class="header__logout" mat-button (click)="logout()">
-        LOGOUT
-      </button> -->
     </div>
   </div>
 

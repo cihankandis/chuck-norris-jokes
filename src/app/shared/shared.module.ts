@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material/material.module';
 
 import { HeaderComponent } from './header/header.component';
+import { JokeComponent } from './joke/joke.component';
 
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +18,7 @@ import { RouterModule } from '@angular/router';
     FlexLayoutModule,
     RouterModule
   ],
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, JokeComponent],
   providers: [],
   exports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    HeaderComponent
+    HeaderComponent,
+    JokeComponent
   ]
 })
 export class SharedModule {}

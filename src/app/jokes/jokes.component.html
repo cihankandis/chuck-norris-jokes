@@ -4,12 +4,9 @@
     REFRESH JOKES
   </button>
 </div>
-<mat-card *ngFor="let joke of jokes" class="joke-card">
-  <div class="joke-item">
-    <div [innerHtml]="joke.joke"></div>
-    <button mat-icon-button (click)="changeFavouriteStatusOfJoke(joke)">
-      <mat-icon *ngIf="joke.isFavourite" style="color: red"> favorite </mat-icon
-      ><mat-icon *ngIf="!joke.isFavourite"> favorite_border </mat-icon>
-    </button>
-  </div>
-</mat-card>
+
+<joke
+  *ngFor="let joke of jokes"
+  [joke]="joke"
+  (favouriteChange)="changeFavouriteStatusOfJoke($event)"
+></joke>

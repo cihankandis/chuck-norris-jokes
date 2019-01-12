@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { JokesService } from '../core/services/jokes.service';
 import { Joke } from '../core/models/joke';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-jokes',
@@ -12,7 +13,10 @@ export class JokesComponent implements OnInit {
   private JOKE_COUNT = 10;
   jokes: Joke[];
 
-  constructor(private jokesService: JokesService) {}
+  constructor(
+    private jokesService: JokesService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.fetchJokes();
@@ -31,6 +35,12 @@ export class JokesComponent implements OnInit {
   }
 
   changeFavouriteStatusOfJoke(joke: Joke) {
-    joke.isFavourite = this.jokesService.changeFavouriteStatusOfJoke(joke);
+    if (!joke.isFavourite && this.jokesService.isFavouriteListFull()) {
+      this.toastr.error(
+        'Favourite list is full. You should remove items to add new ones!'
+      );
+    } else {
+      joke.isFavourite = this.jokesService.changeFavouriteStatusOfJoke(joke);
+    }
   }
 }

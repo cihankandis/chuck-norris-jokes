@@ -1,0 +1,15 @@
+.joke-card {
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  transition: box-shadow 0.3s;
+}
+
+.joke-card:hover {
+  box-shadow: 0 0 40px rgba(33, 33, 33, 0.2);
+}
+.joke-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

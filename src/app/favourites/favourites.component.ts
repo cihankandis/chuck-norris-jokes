@@ -4,8 +4,9 @@ import { interval, Subscription } from 'rxjs';
 
 import { JokesService } from '../core/services/jokes.service';
 import { Joke } from '../core/models/joke';
+import { ToastrService } from 'ngx-toastr';
 
-const autoAddJokeInterval = interval(1000);
+const autoAddJokeInterval = interval(5000);
 
 @Component({
   selector: 'app-favourites',
@@ -16,7 +17,10 @@ export class FavouritesComponent {
   autoAddSubscription: Subscription;
   autoAddToggleValue: boolean = false;
 
-  constructor(public jokesService: JokesService) {}
+  constructor(
+    public jokesService: JokesService,
+    private toastr: ToastrService
+  ) {}
 
   changeFavouriteStatusOfJoke(joke: Joke) {
     joke.isFavourite = this.jokesService.changeFavouriteStatusOfJoke(joke);
@@ -35,6 +39,7 @@ export class FavouritesComponent {
           if (this.jokesService.isFavouriteListFull()) {
             this.autoAddToggleValue = false;
             this.autoAddSubscription.unsubscribe();
+            this.toastr.info('Favourite list is full!');
           }
         });
       });
