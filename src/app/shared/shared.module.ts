@@ -5,6 +5,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material/material.module';
 
+import { HeaderComponent } from './header/header.component';
+
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -15,14 +17,15 @@ import { RouterModule } from '@angular/router';
     FlexLayoutModule,
     RouterModule
   ],
-  declarations: [],
+  declarations: [HeaderComponent],
   providers: [],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HeaderComponent
   ]
 })
 export class SharedModule {}

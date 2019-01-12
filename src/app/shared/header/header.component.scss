@@ -1,0 +1,12 @@
+.header {
+  position: fixed;
+  border-bottom: 1px solid #b5b5b596;
+  padding: 0;
+  background: white;
+  z-index: 1;
+  &__logout {
+    height: 100%;
+    color: purple;
+    font-weight: bold;
+  }
+}

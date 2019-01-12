@@ -1,6 +1,8 @@
-<!-- <app-header></app-header> -->
-<div fxFlexFill fxLayout="row">
-  <div class="container" fxFlex fxLayout="column">
+<app-header></app-header>
+<div fxLayout="row" style="height: 100%;">
+  <span fxFlex="15%" fxFlex.lt-sm="20px"></span>
+  <div class="container" fxFlex="auto" fxFlexFill>
     <router-outlet></router-outlet>
   </div>
+  <span fxFlex="15%" fxFlex.lt-sm="20px"></span>
 </div>
