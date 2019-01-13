@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../core/services/auth.service';
+import { ValidationService } from '../core/services/validation.service';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,10 @@ export class LoginComponent implements OnInit {
       usernameCtrl: new FormControl('', [Validators.required]),
       passwordCtrl: new FormControl('', [
         Validators.required,
-        Validators.maxLength(32)
+        Validators.maxLength(32),
+        ValidationService.passwordForbiddenCharactersValidator,
+        ValidationService.passwordIncreasingThreeLettersValidator,
+        ValidationService.passwordTwoNonOverlapingPairsValidator
       ])
     });
   }
@@ -53,9 +57,15 @@ export class LoginComponent implements OnInit {
 
   getErrorPassword() {
     return this.loginForm.get('passwordCtrl').hasError('required')
-      ? 'Username is required'
+      ? 'Password is required'
       : this.loginForm.get('passwordCtrl').hasError('maxlength')
       ? 'Passwords cannot be longer than 32 characters.'
+      : this.loginForm.get('passwordCtrl').hasError('invalidIncreasingLetters')
+      ? 'Passwords must include one increasing straight of at least three letters, like ‘abc’, ‘cde’, ‘fgh’, and so on, up to ‘xyz’.'
+      : this.loginForm.get('passwordCtrl').hasError('invalidCharacters')
+      ? 'Passwords may not contain the letters i, O, or l, as these letters'
+      : this.loginForm.get('passwordCtrl').hasError('overlapingPairs')
+      ? 'Passwords must contain at least two non-overlapping pairs of letters'
       : '';
   }
 

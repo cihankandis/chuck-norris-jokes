@@ -8,6 +8,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AuthService } from './services/auth.service';
 import { JokesService } from './services/jokes.service';
 import { StorageService } from './services/storage.service';
+import { ValidationService } from './services/validation.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { StorageService } from './services/storage.service';
   ],
   exports: [],
   declarations: [],
-  providers: [AuthService, JokesService, StorageService]
+  providers: [AuthService, JokesService, StorageService, ValidationService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
