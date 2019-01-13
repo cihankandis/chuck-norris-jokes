@@ -35,9 +35,18 @@
               mat-raised-button
               color="primary"
               (click)="login()"
+              style="width: 100%;"
             >
               LOGIN
             </button>
+          </div>
+          <div
+            style="margin-top: 16px; text-align: -webkit-center;"
+            *ngIf="isLoginFailed"
+          >
+            <mat-error>
+              Login Failed: username or password is wrong!
+            </mat-error>
           </div>
         </div>
       </mat-card-content>
