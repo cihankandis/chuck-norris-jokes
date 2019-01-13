@@ -6,7 +6,7 @@
       <img style="max-height: 48px" src="assets/icons/chuck.svg" />
       <span fxHide.lt-md="true"> Chuck Norris Jokes </span>
     </div>
-    <nav>
+    <nav *ngIf="authService.getUser()">
       <a mat-button routerLink="/jokes" routerLinkActive="active-link">
         JOKES
       </a>
@@ -23,14 +23,12 @@
         >
       </a>
     </nav>
-    <div *ngIf="authService.getUser()">
-      <nav>
-        <a mat-button (click)="logout()">
-          <span fxShow="true" fxShow.lt-sm="false">LOGOUT</span>
-          <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon>
-        </a>
-      </nav>
-    </div>
+    <nav *ngIf="authService.getUser()">
+      <a mat-button (click)="logout()">
+        <span fxShow="true" fxShow.lt-sm="false">LOGOUT</span>
+        <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon>
+      </a>
+    </nav>
   </div>
 
   <span fxFlex="15%" fxFlex.lt-sm="20px"></span>
