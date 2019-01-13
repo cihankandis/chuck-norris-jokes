@@ -20,7 +20,7 @@ export class JokesService {
 
   fetchJokes(count) {
     return this.http
-      .get<any>(`${environment.jokesApiUrl}/jokes/random/${count}`)
+      .get<any>(`${environment.backendApiUrl}/api/v1/jokes/jokes/` + count)
       .pipe(
         map(jokes => {
           //   return jokes.value;
