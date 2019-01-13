@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -40,6 +41,17 @@ export class AuthService {
           return user;
         })
       );
+  }
+
+  validateToken() {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.user.token
+    });
+
+    return this.http.get<any>(`${environment.backendApiUrl}/login/verify`, {
+      headers: headers
+    });
   }
 
   isLoggedIn() {
