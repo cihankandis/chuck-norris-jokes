@@ -7,6 +7,8 @@ export class ValidationService {
       charArray.includes('I')
     ) {
       return { invalidCharacters: true };
+    } else {
+      return null;
     }
   }
 

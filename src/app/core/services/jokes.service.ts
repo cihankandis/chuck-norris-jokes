@@ -6,9 +6,10 @@ import { environment } from '../../../environments/environment';
 import { Joke } from '../models/joke';
 import { StorageService } from './storage.service';
 
+const MAX_FAVOURITE_JOKE_COUNT = 10;
+
 @Injectable({ providedIn: 'root' })
 export class JokesService {
-  private MAX_FAVOURITE_JOKE_COUNT = 10;
   private favouriteJokes: Joke[] =
     this.storageService.getItem('favouriteJokes') || [];
 
@@ -25,6 +26,7 @@ export class JokesService {
           //   return jokes.value;
           return (
             jokes &&
+            jokes.value &&
             jokes.value.map(joke => {
               joke.isFavourite =
                 this.favouriteJokes.findIndex(item => item.id === joke.id) >= 0;
@@ -40,7 +42,7 @@ export class JokesService {
   }
 
   isFavouriteListFull() {
-    return this.favouriteJokes.length >= this.MAX_FAVOURITE_JOKE_COUNT;
+    return this.favouriteJokes.length >= MAX_FAVOURITE_JOKE_COUNT;
   }
 
   changeFavouriteStatusOfJoke(joke: Joke): boolean {
@@ -48,7 +50,7 @@ export class JokesService {
       this.removeFromFavourites(joke);
       return false;
     } else {
-      if (this.favouriteJokes.length >= this.MAX_FAVOURITE_JOKE_COUNT) {
+      if (this.favouriteJokes.length >= MAX_FAVOURITE_JOKE_COUNT) {
         return false;
       }
       this.addToFavourites(joke);
@@ -56,7 +58,7 @@ export class JokesService {
     }
   }
 
-  addToFavourites(joke: Joke) {
+  private addToFavourites(joke: Joke) {
     if (this.favouriteJokes.findIndex(item => item.id === joke.id) < 0) {
       joke.isFavourite = true;
       this.favouriteJokes.push(joke);
@@ -64,7 +66,7 @@ export class JokesService {
     }
   }
 
-  removeFromFavourites(joke: Joke) {
+  private removeFromFavourites(joke: Joke) {
     let index = this.favouriteJokes.findIndex(item => item.id === joke.id);
     if (index > -1) {
       this.favouriteJokes.splice(index, 1);

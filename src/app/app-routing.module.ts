@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { JokesComponent } from './jokes/jokes.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: '/jokes',
