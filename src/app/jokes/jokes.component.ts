@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class JokesComponent implements OnInit {
   private JOKE_COUNT = 10;
-  jokes: Joke[];
+  jokes: Joke[] = [];
 
   constructor(
     private jokesService: JokesService,
