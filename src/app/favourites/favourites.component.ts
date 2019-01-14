@@ -29,20 +29,31 @@ export class FavouritesComponent implements OnDestroy {
   onAutoAddChange(val) {
     this.autoAddToggleValue = val.checked;
     if (!val.checked) {
-      if (this.autoAddSubscription) {
-        this.autoAddSubscription.unsubscribe();
-      }
+      this.deactivateAutoJoke();
     } else {
-      this.autoAddSubscription = autoAddJokeInterval.subscribe(() => {
-        this.jokesService.fetchJokes(1).subscribe(jokes => {
-          if (!jokes[0].isFavourite) this.changeFavouriteStatusOfJoke(jokes[0]);
-          if (this.jokesService.isFavouriteListFull()) {
-            this.autoAddToggleValue = false;
-            this.autoAddSubscription.unsubscribe();
-            this.toastr.info('Favourite list is full!');
-          }
-        });
+      this.activateAutoJoke();
+    }
+  }
+
+  private deactivateAutoJoke() {
+    this.autoAddToggleValue = false;
+    if (this.autoAddSubscription) {
+      this.autoAddSubscription.unsubscribe();
+    }
+  }
+
+  private activateAutoJoke() {
+    this.autoAddSubscription = autoAddJokeInterval.subscribe(() => {
+      this.jokesService.fetchJokes(1).subscribe(jokes => {
+        if (!jokes[0].isFavourite) this.changeFavouriteStatusOfJoke(jokes[0]);
+        this.checkFavouriteListFull();
       });
+    });
+  }
+  private checkFavouriteListFull() {
+    if (this.jokesService.isFavouriteListFull()) {
+      this.deactivateAutoJoke();
+      this.toastr.info('Favourite list is full!');
     }
   }
 
