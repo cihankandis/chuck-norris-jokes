@@ -2,15 +2,15 @@
   <span fxFlex="15%" fxFlex.lt-sm="20px"></span>
 
   <div fxFlex="auto" fxLayoutAlign="space-between center" fxFlexFill>
-    <div class="app-logo">
-      <img style="max-height: 48px" src="assets/icons/chuck.svg" />
+    <div class="header__app_info">
+      <img class="header__app_info__app_icon" src="assets/icons/chuck.svg" />
       <span fxHide.lt-md="true"> Chuck Norris Jokes </span>
     </div>
-    <nav *ngIf="authService.getUser()" class="header-nav">
+    <nav *ngIf="authService.getUser()" class="header__nav">
       <!-- <a mat-button routerLink="/jokes" routerLinkActive="active-link"> -->
       <button
         mat-button
-        class="nav-button"
+        class="header__nav__button"
         routerLink="/jokes"
         routerLinkActive="active-link"
       >
@@ -18,7 +18,7 @@
       </button>
       <button
         mat-button
-        class="nav-button"
+        class="header__nav__button"
         routerLink="/favourites"
         routerLinkActive="active-link"
       >
@@ -34,9 +34,17 @@
         >
       </button>
     </nav>
-    <nav *ngIf="authService.getUser()" class="header-nav">
-      <button mat-button [matMenuTriggerFor]="menu" class="user-info">
-        <span fxShow="true" fxShow.lt-sm="false" class="user-name">
+    <nav *ngIf="authService.getUser()" class="header__nav">
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        class="header__nav__user_info"
+      >
+        <span
+          fxShow="true"
+          fxShow.lt-sm="false"
+          class="header__nav__user_info__username"
+        >
           {{
             authService.getUser().user.firstname +
               ' ' +

@@ -1,7 +1,10 @@
-.jokes-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  &__button {
+    height: 36px;
+  }
 }
 .spinner-container {
   display: flex;

@@ -28,22 +28,16 @@
             </mat-error>
           </mat-form-field>
 
-          <div style="margin-top: 16px;">
-            <!-- [disabled]="!loginForm.valid" -->
-            <button
-              class="form__button"
-              mat-raised-button
-              color="primary"
-              (click)="login()"
-              style="width: 100%;"
-            >
-              LOGIN
-            </button>
-          </div>
-          <div
-            style="margin-top: 16px; text-align: -webkit-center;"
-            *ngIf="isLoginFailed"
+          <!-- [disabled]="!loginForm.valid" -->
+          <button
+            class="form__button"
+            mat-raised-button
+            color="primary"
+            (click)="login()"
           >
+            LOGIN
+          </button>
+          <div class="form__message" *ngIf="isLoginFailed">
             <mat-error>
               Login Failed: username or password is wrong!
             </mat-error>

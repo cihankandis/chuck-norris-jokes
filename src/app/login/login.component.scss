@@ -5,4 +5,12 @@
   max-width: 400px;
   width: 100%;
   align-self: center;
+  &__button {
+    width: 100%;
+    margin-top: 16px;
+  }
+  &__message {
+    margin-top: 16px;
+    text-align: -webkit-center;
+  }
 }

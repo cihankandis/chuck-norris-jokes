@@ -1,8 +1,9 @@
-<mat-card class="joke-card" (click)="onFavouriteChange(joke)">
-  <div class="joke-item">
+<mat-card class="joke" (click)="onFavouriteChange(joke)">
+  <div class="joke__item">
     <div [innerHtml]="joke.joke"></div>
     <button mat-icon-button>
-      <mat-icon *ngIf="joke.isFavourite" style="color: red"> favorite </mat-icon
+      <mat-icon *ngIf="joke.isFavourite" class="joke__item__icon">
+        favorite </mat-icon
       ><mat-icon *ngIf="!joke.isFavourite"> favorite_border </mat-icon>
     </button>
   </div>
