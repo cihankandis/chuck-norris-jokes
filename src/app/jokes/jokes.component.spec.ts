@@ -116,4 +116,8 @@ class MockJokesService {
   public fetchJokes(): Observable<any> {
     return of(JOKES);
   }
+
+  public getFavouritesFromServerCache(): Observable<any> {
+    return of(JOKES);
+  }
 }

@@ -4,21 +4,27 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { JokesService } from './jokes.service';
+import { AuthService } from './auth.service';
 
 describe('JokesService', () => {
   let service: JokesService;
+  let authService;
   let httpMock: HttpTestingController;
 
   let jokes: any[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [JokesService],
+      providers: [
+        JokesService,
+        { provide: AuthService, useClass: MockAuthService }
+      ],
       imports: [HttpClientTestingModule]
     });
 
     // inject the service
     service = TestBed.get(JokesService);
+    authService = TestBed.get(JokesService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -135,3 +141,9 @@ describe('JokesService', () => {
     expect(service.isFavouriteListFull()).toBe(false);
   });
 });
+
+class MockAuthService {
+  public getUser(): any {
+    return { user: { email: 'mock' } };
+  }
+}

@@ -21,6 +21,13 @@ export class JokesComponent implements OnInit {
 
   ngOnInit() {
     this.fetchJokes();
+
+    this.fetchCacheFromServer();
+  }
+  fetchCacheFromServer() {
+    this.jokesService.getFavouritesFromServerCache().subscribe(favs => {
+      console.log(favs);
+    });
   }
 
   fetchJokes() {

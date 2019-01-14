@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Joke } from '../models/joke';
 import { StorageService } from './storage.service';
+import { AuthService } from './auth.service';
 
 const MAX_FAVOURITE_JOKE_COUNT = 10;
 
@@ -15,7 +16,8 @@ export class JokesService {
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private authService: AuthService
   ) {}
 
   fetchJokes(count) {
@@ -63,7 +65,26 @@ export class JokesService {
       joke.isFavourite = true;
       this.favouriteJokes.push(joke);
       this.storageService.setItem('favouriteJokes', this.favouriteJokes);
+      this.saveFavouritesOnServer().subscribe(success => {
+        console.log('jokes saved on server');
+      });
     }
+  }
+
+  getFavouritesFromServerCache() {
+    return this.http.post<any>(
+      `${environment.backendApiUrl}/cache/favourites`,
+      {
+        email: this.authService.getUser().user.email
+      }
+    );
+  }
+
+  private saveFavouritesOnServer() {
+    return this.http.post<any>(`${environment.backendApiUrl}/cache`, {
+      email: this.authService.getUser().user.email,
+      favourites: this.favouriteJokes
+    });
   }
 
   private removeFromFavourites(joke: Joke) {
