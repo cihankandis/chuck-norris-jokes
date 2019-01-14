@@ -6,11 +6,22 @@
       <img style="max-height: 48px" src="assets/icons/chuck.svg" />
       <span fxHide.lt-md="true"> Chuck Norris Jokes </span>
     </div>
-    <nav *ngIf="authService.getUser()">
-      <a mat-button routerLink="/jokes" routerLinkActive="active-link">
+    <nav *ngIf="authService.getUser()" class="header-nav">
+      <!-- <a mat-button routerLink="/jokes" routerLinkActive="active-link"> -->
+      <button
+        mat-button
+        class="nav-button"
+        routerLink="/jokes"
+        routerLinkActive="active-link"
+      >
         JOKES
-      </a>
-      <a mat-button routerLink="/favourites" routerLinkActive="active-link">
+      </button>
+      <button
+        mat-button
+        class="nav-button"
+        routerLink="/favourites"
+        routerLinkActive="active-link"
+      >
         <span
           matBadge="{{
             jokesService.favouriteJokes.length
@@ -21,9 +32,9 @@
           matBadgeColor="warn"
           >FAVOURITES</span
         >
-      </a>
+      </button>
     </nav>
-    <nav *ngIf="authService.getUser()">
+    <nav *ngIf="authService.getUser()" class="header-nav">
       <!-- <a mat-button (click)="logout()">
         <span fxShow="true" fxShow.lt-sm="false">LOGOUT</span>
         <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon>
@@ -40,7 +51,10 @@
         <mat-icon fxShow="false" fxShow.lt-sm="true">more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="logout()">LOGOUT</button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon
+          >LOGOUT
+        </button>
       </mat-menu>
     </nav>
   </div>
