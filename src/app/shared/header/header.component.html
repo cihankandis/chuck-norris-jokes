@@ -35,10 +35,6 @@
       </button>
     </nav>
     <nav *ngIf="authService.getUser()" class="header-nav">
-      <!-- <a mat-button (click)="logout()">
-        <span fxShow="true" fxShow.lt-sm="false">LOGOUT</span>
-        <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon>
-      </a> -->
       <button mat-button [matMenuTriggerFor]="menu" class="user-info">
         <span fxShow="true" fxShow.lt-sm="false" class="user-name">
           {{
@@ -52,8 +48,7 @@
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
         <button mat-menu-item (click)="logout()">
-          <mat-icon fxShow="false" fxShow.lt-sm="true">exit_to_app</mat-icon
-          >LOGOUT
+          <mat-icon>exit_to_app</mat-icon>LOGOUT
         </button>
       </mat-menu>
     </nav>

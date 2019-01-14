@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { interval, Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ const autoAddJokeInterval = interval(5000);
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.scss']
 })
-export class FavouritesComponent {
+export class FavouritesComponent implements OnDestroy {
   autoAddSubscription: Subscription;
   autoAddToggleValue: boolean = false;
 
@@ -44,5 +44,9 @@ export class FavouritesComponent {
         });
       });
     }
+  }
+
+  ngOnDestroy() {
+    if (this.autoAddSubscription) this.autoAddSubscription.unsubscribe();
   }
 }

@@ -30,7 +30,8 @@ export class AuthGuardService implements CanActivate {
       return this.authService.validateToken().pipe(
         map(success => true),
         catchError((err, caught) => {
-          this.toastrService.error(err.error.err);
+          const errMsg = err.error.err || 'There is a problem on the server!';
+          this.toastrService.error(errMsg);
           this.navigateLogin(state);
           return empty();
         })

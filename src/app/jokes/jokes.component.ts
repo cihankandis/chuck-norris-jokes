@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class JokesComponent implements OnInit {
   private JOKE_COUNT = 10;
   jokes: Joke[] = [];
+  fetchingJokes: boolean = false;
 
   constructor(
     private jokesService: JokesService,
@@ -23,12 +24,16 @@ export class JokesComponent implements OnInit {
   }
 
   fetchJokes() {
+    this.fetchingJokes = true;
     this.jokesService.fetchJokes(this.JOKE_COUNT).subscribe(
       (jokes: any[]) => {
         this.jokes = jokes;
+        this.fetchingJokes = false;
         console.log(jokes);
       },
       err => {
+        this.fetchingJokes = false;
+        this.toastr.error('Could not get the jokes!');
         console.error(err);
       }
     );

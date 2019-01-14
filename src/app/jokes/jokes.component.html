@@ -4,9 +4,14 @@
     REFRESH JOKES
   </button>
 </div>
+<div *ngIf="!fetchingJokes">
+  <joke
+    *ngFor="let joke of jokes"
+    [joke]="joke"
+    (favouriteChange)="changeFavouriteStatusOfJoke($event)"
+  ></joke>
+</div>
 
-<joke
-  *ngFor="let joke of jokes"
-  [joke]="joke"
-  (favouriteChange)="changeFavouriteStatusOfJoke($event)"
-></joke>
+<div class="spinner-container">
+  <mat-spinner *ngIf="fetchingJokes"></mat-spinner>
+</div>
