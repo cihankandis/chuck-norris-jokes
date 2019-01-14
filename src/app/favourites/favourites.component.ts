@@ -6,7 +6,7 @@ import { JokesService } from '../core/services/jokes.service';
 import { Joke } from '../core/models/joke';
 import { ToastrService } from 'ngx-toastr';
 
-const autoAddJokeInterval = interval(5000);
+const autoAddJokeInterval = interval(500);
 
 @Component({
   selector: 'app-favourites',
@@ -45,19 +45,25 @@ export class FavouritesComponent implements OnDestroy {
   private activateAutoJoke() {
     this.autoAddSubscription = autoAddJokeInterval.subscribe(() => {
       this.jokesService.fetchJokes(1).subscribe(jokes => {
-        if (!jokes[0].isFavourite) { this.changeFavouriteStatusOfJoke(jokes[0]); }
+        if (!jokes[0].isFavourite) {
+          this.changeFavouriteStatusOfJoke(jokes[0]);
+        }
         this.checkFavouriteListFull();
       });
     });
   }
   private checkFavouriteListFull() {
     if (this.jokesService.isFavouriteListFull()) {
+      if (this.autoAddToggleValue) {
+        this.toastr.info('Favourite list is full!');
+      }
       this.deactivateAutoJoke();
-      this.toastr.info('Favourite list is full!');
     }
   }
 
   ngOnDestroy() {
-    if (this.autoAddSubscription) { this.autoAddSubscription.unsubscribe(); }
+    if (this.autoAddSubscription) {
+      this.autoAddSubscription.unsubscribe();
+    }
   }
 }

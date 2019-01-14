@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Joke } from '../models/joke';
@@ -35,7 +35,8 @@ export class JokesService {
               return joke;
             })
           );
-        })
+        }),
+        share()
       );
   }
 
