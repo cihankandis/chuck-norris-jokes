@@ -19,13 +19,10 @@ export class AuthGuardService implements CanActivate {
     private toastrService: ToastrService
   ) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | any> | boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     if (!this.authService.isLoggedIn()) {
       // not logged in, redirect to login page with return url.
-      this.navigateLogin(state);
+      return this.navigateLogin(state);
     } else {
       return this.authService.validateToken().pipe(
         map(success => true),
@@ -39,9 +36,10 @@ export class AuthGuardService implements CanActivate {
     }
   }
 
-  navigateLogin(state) {
+  navigateLogin(state): boolean {
     this.router.navigate(['/login'], {
       queryParams: { returnUrl: state.url }
     });
+    return false;
   }
 }

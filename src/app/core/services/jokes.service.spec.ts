@@ -33,7 +33,7 @@ describe('JokesService', () => {
     });
 
     const req = httpMock.expectOne(
-      'http://api.icndb.com/jokes/random/10',
+      'http://localhost:3000/api/v1/jokes/jokes/10',
       'fetch jokes'
     );
     expect(req.request.method).toBe('GET');

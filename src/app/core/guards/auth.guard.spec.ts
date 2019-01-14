@@ -2,6 +2,8 @@ import { AuthGuardService } from './auth-guard.service';
 import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { of } from 'rxjs';
 
 class MockRouter {
   navigate(path) {}
@@ -9,31 +11,45 @@ class MockRouter {
 
 let mockSnapshot = jasmine.createSpyObj('RouterStateSnapshot', ['toString']);
 
-TestBed.configureTestingModule({
-  imports: [RouterTestingModule],
-  providers: [{ provide: RouterStateSnapshot, useValue: mockSnapshot }]
-}).compileComponents();
-
 describe('AuthGuard', () => {
   describe('canActivate', () => {
     let authGuard: AuthGuardService;
     let authService;
     let router;
+    let toastrService: ToastrService;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, ToastrModule.forRoot()],
+        providers: [
+          { provide: RouterStateSnapshot, useValue: mockSnapshot },
+          ToastrService
+        ]
+      });
+
+      // inject the service
+      toastrService = TestBed.get(ToastrService);
+    });
 
     it('should return true for a logged in user', () => {
-      authService = { isLoggedIn: () => true };
+      authService = { isLoggedIn: () => true, validateToken: () => of(true) };
       router = new MockRouter();
-      authGuard = new AuthGuardService(authService, router);
 
-      expect(
-        authGuard.canActivate(new ActivatedRouteSnapshot(), mockSnapshot)
-      ).toEqual(true);
+      toastrService = TestBed.get(ToastrService);
+      authGuard = new AuthGuardService(authService, router, toastrService);
+
+      authGuard
+        .canActivate(new ActivatedRouteSnapshot(), mockSnapshot)
+        .subscribe(res => {
+          expect(res).toBe(true);
+        });
     });
 
     it('should navigate to home for a logged out user', () => {
       authService = { isLoggedIn: () => false };
       router = new MockRouter();
-      authGuard = new AuthGuardService(authService, router);
+      toastrService = TestBed.get(ToastrService);
+      authGuard = new AuthGuardService(authService, router, toastrService);
       spyOn(router, 'navigate');
 
       expect(
