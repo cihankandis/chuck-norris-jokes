@@ -5,11 +5,11 @@
   </button>
 </div>
 <div *ngIf="!fetchingJokes">
-  <joke
+  <app-joke
     *ngFor="let joke of jokes"
     [joke]="joke"
     (favouriteChange)="changeFavouriteStatusOfJoke($event)"
-  ></joke>
+  ></app-joke>
 </div>
 
 <div class="spinner-container">

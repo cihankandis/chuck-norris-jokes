@@ -88,7 +88,7 @@ export class JokesService {
   }
 
   private removeFromFavourites(joke: Joke) {
-    let index = this.favouriteJokes.findIndex(item => item.id === joke.id);
+    const index = this.favouriteJokes.findIndex(item => item.id === joke.id);
     if (index > -1) {
       this.favouriteJokes.splice(index, 1);
       this.storageService.setItem('favouriteJokes', this.favouriteJokes);

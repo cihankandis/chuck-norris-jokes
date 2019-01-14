@@ -11,8 +11,8 @@
   </mat-slide-toggle>
 </div>
 
-<joke
+<app-joke
   *ngFor="let joke of jokesService.getFavouriteJokes()"
   [joke]="joke"
   (favouriteChange)="changeFavouriteStatusOfJoke($event)"
-></joke>
+></app-joke>

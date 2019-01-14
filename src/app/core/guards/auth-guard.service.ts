@@ -8,7 +8,7 @@ import {
 
 import { AuthService } from '../services/auth.service';
 import { map, catchError } from 'rxjs/operators';
-import { Observable, empty } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
@@ -30,7 +30,7 @@ export class AuthGuardService implements CanActivate {
           const errMsg = err.error.err || 'There is a problem on the server!';
           this.toastrService.error(errMsg);
           this.navigateLogin(state);
-          return empty();
+          return EMPTY;
         })
       );
     }

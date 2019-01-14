@@ -9,7 +9,7 @@ class MockRouter {
   navigate(path) {}
 }
 
-let mockSnapshot = jasmine.createSpyObj('RouterStateSnapshot', ['toString']);
+const mockSnapshot = jasmine.createSpyObj('RouterStateSnapshot', ['toString']);
 
 describe('AuthGuard', () => {
   describe('canActivate', () => {

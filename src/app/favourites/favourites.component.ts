@@ -15,7 +15,7 @@ const autoAddJokeInterval = interval(5000);
 })
 export class FavouritesComponent implements OnDestroy {
   autoAddSubscription: Subscription;
-  autoAddToggleValue: boolean = false;
+  autoAddToggleValue = false;
 
   constructor(
     public jokesService: JokesService,
@@ -45,7 +45,7 @@ export class FavouritesComponent implements OnDestroy {
   private activateAutoJoke() {
     this.autoAddSubscription = autoAddJokeInterval.subscribe(() => {
       this.jokesService.fetchJokes(1).subscribe(jokes => {
-        if (!jokes[0].isFavourite) this.changeFavouriteStatusOfJoke(jokes[0]);
+        if (!jokes[0].isFavourite) { this.changeFavouriteStatusOfJoke(jokes[0]); }
         this.checkFavouriteListFull();
       });
     });
@@ -58,6 +58,6 @@ export class FavouritesComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.autoAddSubscription) this.autoAddSubscription.unsubscribe();
+    if (this.autoAddSubscription) { this.autoAddSubscription.unsubscribe(); }
   }
 }

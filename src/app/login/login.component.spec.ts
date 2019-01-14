@@ -43,7 +43,7 @@ describe('Component: Login', () => {
 
   it('username validation', () => {
     let errors = {};
-    let username = component.loginForm.controls['usernameCtrl'];
+    const username = component.loginForm.controls['usernameCtrl'];
     expect(username.valid).toBeFalsy();
 
     // username field is required
@@ -63,7 +63,7 @@ describe('Component: Login', () => {
 
   it('password field validity', () => {
     let errors = {};
-    let password = component.loginForm.controls['passwordCtrl'];
+    const password = component.loginForm.controls['passwordCtrl'];
 
     // Email field is required
     errors = password.errors || {};

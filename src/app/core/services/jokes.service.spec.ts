@@ -6,6 +6,12 @@ import { TestBed, inject } from '@angular/core/testing';
 import { JokesService } from './jokes.service';
 import { AuthService } from './auth.service';
 
+class MockAuthService {
+  public getUser(): any {
+    return { user: { email: 'mock' } };
+  }
+}
+
 describe('JokesService', () => {
   let service: JokesService;
   let authService;
@@ -49,7 +55,7 @@ describe('JokesService', () => {
         {
           id: 375,
           joke:
-            'After taking a steroids test doctors informed Chuck Norris that he had tested positive. He laughed upon receiving this information, and said &quot;of course my urine tested positive, what do you think they make steroids from?&quot;',
+            'After taking a steroids test doctors informed Chuck Norris that he ',
           categories: []
         },
         {
@@ -72,18 +78,17 @@ describe('JokesService', () => {
         {
           id: 419,
           joke:
-            "Count from one to ten. That's how long it would take Chuck Norris to kill you...Forty seven times.",
+            'Count from one to ten. Thats how long it would take Chuck Norris to kill you...Forty seven times.',
           categories: []
         },
         {
           id: 153,
-          joke:
-            'The movie &quot;Delta Force&quot; was extremely hard to make because Chuck had to downplay his abilities. The first few cuts were completely unbelievable.',
+          joke: 'The movie &quot;Delta Force&quot; was extremely unbelievable.',
           categories: []
         },
         {
           id: 538,
-          joke: "Chuck Norris's log statements are always at the FATAL level.",
+          joke: 'Chuck Norriss log statements are always at the FATAL level.',
           categories: ['nerdy']
         },
         {
@@ -95,7 +100,7 @@ describe('JokesService', () => {
         {
           id: 73,
           joke:
-            "Chuck Norris doesn't actually write books, the words assemble themselves out of fear.",
+            'Chuck Norris doesnt actually write books, the words assemble themselves out of fear.',
           categories: []
         },
         {
@@ -141,9 +146,3 @@ describe('JokesService', () => {
     expect(service.isFavouriteListFull()).toBe(false);
   });
 });
-
-class MockAuthService {
-  public getUser(): any {
-    return { user: { email: 'mock' } };
-  }
-}

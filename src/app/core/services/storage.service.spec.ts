@@ -7,9 +7,6 @@ import { StorageService } from './storage.service';
 
 describe('JokesService', () => {
   let service: StorageService;
-  let httpMock: HttpTestingController;
-
-  let jokes: any[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({

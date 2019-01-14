@@ -18,7 +18,7 @@ import { ValidationService } from '../core/services/validation.service';
 export class LoginComponent implements OnInit {
   returnUrl: string;
   loginForm: FormGroup;
-  isLoginFailed: boolean = false;
+  isLoginFailed = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -77,13 +77,11 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         data => {
-          console.log(data);
           // login successful so redirect to return url
           this.router.navigateByUrl(this.returnUrl);
         },
         error => {
           this.isLoginFailed = true;
-          console.log(error);
         }
       );
   }

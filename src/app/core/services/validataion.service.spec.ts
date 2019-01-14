@@ -16,7 +16,7 @@ describe('ValidationService', () => {
   it('should return null forbidden chars', () => {
     expect(
       ValidationService.passwordForbiddenCharactersValidator({ value: 'abc' })
-    ).toBeNull;
+    ).toBeNull();
   });
 
   it('should return true forbidden chars', () => {
@@ -42,7 +42,7 @@ describe('ValidationService', () => {
       ValidationService.passwordTwoNonOverlapingPairsValidator({
         value: 'aabb'
       })
-    ).toBeNull;
+    ).toBeNull();
   });
 
   it('should return true passwordTwoNonOverlapingPairsValidator', () => {
