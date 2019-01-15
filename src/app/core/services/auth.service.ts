@@ -5,11 +5,12 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
-import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { ValidateResponse } from '../models/validateResponse';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private user: any;
+  private user: User;
 
   constructor(
     private http: HttpClient,
@@ -25,12 +26,12 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`${environment.backendApiUrl}/login`, {
+      .post<User>(`${environment.backendApiUrl}/login`, {
         username,
         password
       })
       .pipe(
-        map(user => {
+        map((user: User) => {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -49,9 +50,12 @@ export class AuthService {
       Authorization: 'Bearer ' + this.user.token
     });
 
-    return this.http.get<any>(`${environment.backendApiUrl}/login/verify`, {
-      headers: headers
-    });
+    return this.http.get<ValidateResponse>(
+      `${environment.backendApiUrl}/login/verify`,
+      {
+        headers: headers
+      }
+    );
   }
 
   isLoggedIn() {

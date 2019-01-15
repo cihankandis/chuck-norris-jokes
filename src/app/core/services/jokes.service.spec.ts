@@ -5,10 +5,22 @@ import {
 import { TestBed, inject } from '@angular/core/testing';
 import { JokesService } from './jokes.service';
 import { AuthService } from './auth.service';
+import { Joke } from '../models/joke';
+import { User } from '../models/user';
 
 class MockAuthService {
-  public getUser(): any {
-    return { user: { email: 'mock' } };
+  public getUser(): User {
+    return {
+      token: '',
+      user: {
+        email: 'test',
+        firstname: 'first_name',
+        guid: 'guid',
+        id: 9999,
+        lastname: 'last_name',
+        username: 'username'
+      }
+    };
   }
 }
 
@@ -17,7 +29,7 @@ describe('JokesService', () => {
   let authService;
   let httpMock: HttpTestingController;
 
-  let jokes: any[];
+  let jokes: Joke[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({

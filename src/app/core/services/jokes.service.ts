@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Joke } from '../models/joke';
 import { StorageService } from './storage.service';
 import { AuthService } from './auth.service';
+import { JokesResponse } from '../models/jokesResponse';
 
 const MAX_FAVOURITE_JOKE_COUNT = 10;
 
@@ -22,7 +23,9 @@ export class JokesService {
 
   fetchJokes(count) {
     return this.http
-      .get<any>(`${environment.backendApiUrl}/api/v1/jokes/jokes/` + count)
+      .get<JokesResponse>(
+        `${environment.backendApiUrl}/api/v1/jokes/jokes/` + count
+      )
       .pipe(
         map(jokes => {
           //   return jokes.value;

@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 import { JOKES } from '../mock/mock-jokes';
 
 class MockJokesService {
-  private favouriteJokes: any[] = JOKES;
+  private favouriteJokes: Joke[] = JOKES;
 
   getFavouriteJokes() {
     return this.favouriteJokes;

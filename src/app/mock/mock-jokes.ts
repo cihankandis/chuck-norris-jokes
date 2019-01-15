@@ -1,4 +1,6 @@
-export const JOKES = [
+import { Joke } from '../core/models/joke';
+
+export const JOKES: Joke[] = [
   {
     id: 375,
     joke: 'After taking a steroids test doctors informed Chuck Norris',

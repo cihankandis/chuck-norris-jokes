@@ -12,11 +12,11 @@ import { Observable, of } from 'rxjs';
 import { JOKES } from '../mock/mock-jokes';
 
 class MockJokesService {
-  public fetchJokes(): Observable<any> {
+  public fetchJokes(): Observable<Joke[]> {
     return of(JOKES);
   }
 
-  public getFavouritesFromServerCache(): Observable<any> {
+  public getFavouritesFromServerCache(): Observable<Joke[]> {
     return of(JOKES);
   }
 }

@@ -31,7 +31,7 @@ export class JokesComponent implements OnInit {
   fetchJokes() {
     this.fetchingJokes = true;
     this.jokesService.fetchJokes(this.JOKE_COUNT).subscribe(
-      (jokes: any[]) => {
+      (jokes: Joke[]) => {
         this.jokes = jokes;
         this.fetchingJokes = false;
       },
