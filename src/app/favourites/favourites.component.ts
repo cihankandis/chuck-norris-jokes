@@ -6,7 +6,7 @@ import { JokesService } from '../core/services/jokes.service';
 import { Joke } from '../core/models/joke';
 import { ToastrService } from 'ngx-toastr';
 
-const autoAddJokeInterval = interval(500);
+const autoAddJokeInterval = interval(5000);
 
 @Component({
   selector: 'app-favourites',
