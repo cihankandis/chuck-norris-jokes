@@ -45,7 +45,7 @@ export class FavouritesComponent implements OnDestroy {
   private activateAutoJoke() {
     this.autoAddSubscription = autoAddJokeInterval.subscribe(() => {
       this.jokesService.fetchJokes(1).subscribe(jokes => {
-        if (!jokes[0].isFavourite) {
+        if (jokes && !jokes[0].isFavourite) {
           this.changeFavouriteStatusOfJoke(jokes[0]);
         }
         this.checkFavouriteListFull();
